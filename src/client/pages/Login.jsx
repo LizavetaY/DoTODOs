@@ -77,8 +77,6 @@ export const Login = () => {
         setLoginEmail(data.email);
         setLoginPassword(data.password);
 
-        login();
-
         resetForm();
       }
     });
