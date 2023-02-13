@@ -1,0 +1,10 @@
+import { gql } from '@apollo/client';
+
+export const LOGIN = gql`
+  query AuthData($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      userId
+      token
+    }
+  }
+`;

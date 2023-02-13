@@ -1,0 +1,73 @@
+type AuthData {
+  userId: ID
+  token: String!
+}
+
+type User {
+  id: ID
+  name: String!
+  surname: String!
+  email: String!
+  password: String
+  createdTodos: [Todo!]
+}
+
+type Todo {
+  id: ID
+  dateOfCreate: String
+  todoName: String
+  todoNote: String
+  dateOfComplete: String
+  isCompleted: Boolean
+  isOverdue: Boolean
+  isToday: Boolean
+  creator: [User!]
+}
+
+type TodosResponse {
+  todos: [Todo]
+  page_size: Int
+  page_number: Int
+  total_count: Int
+  total_all_count: Int
+  incomplete_count: Int
+  dates_of_complete: [String]
+}
+
+type Query {
+  login(email: String!, password: String!): AuthData
+  getUser: User
+  getTodo(id: ID): Todo
+  getAllTodos(
+    offset: Int
+    limit: Int
+    sortByName: Boolean
+    isSortByNameDescending: Boolean
+    sortByDateOfCompleted: Boolean
+    sortByDateOfCompletedDescending: Boolean
+    filterByName: String
+    filterByNote: String
+    filterByStatus: [String]
+    filterByDateOfComplete: String
+  ): TodosResponse
+}
+
+type Mutation {
+  signUp(
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+  ): User
+  editUser(name: String!, surname: String!): User
+  deleteUser: User
+  createTodo(todoName: String!, todoNote: String, dateOfComplete: String): Todo
+  editTodo(
+    id: ID!
+    todoName: String
+    todoNote: String
+    dateOfComplete: String
+    isCompleted: Boolean
+  ): Todo
+  deleteTodo(id: ID): Todo
+}

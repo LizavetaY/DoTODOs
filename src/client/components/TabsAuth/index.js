@@ -1,0 +1,1 @@
+export { TabsAuth } from './TabsAuth';
